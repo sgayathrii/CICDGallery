@@ -1,23 +1,22 @@
-import './style.css';
-const apiKey = import.meta.env.VITE_UNSPLASH_API_KEY;
-const apiUrl = import.meta.env.VITE_UNSPLASH_API_URL;
+import './styles/index.css';
 
-/** HEADER:
- * Accept-Version: v1
- */
+const rootElement = document.querySelector('#app') as HTMLElement;
 
-const main = async () => {
-  const data = await fetch(`${apiUrl}/photos/random`, {
-    headers: {
-      Authorization: 'Client-ID ' + apiKey,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const response = await data.json();
-  console.log(response);
-
-  console.log('fefe');
-};
-
-main();
+rootElement.innerHTML = `
+<header>
+    <nav class="navigation">
+        <span class="navigation__item">Logo</span>
+        <a 
+        class="navigation__item"
+        target="_blank" href="https://www.github.com/abdejohan">GitHub</a>
+    </nav>
+</header>
+<input class="search" type="search"  placeholder="Search.."/>
+<section class="image-container">
+   
+</section>
+<section class="pagination">
+  <button class="pagination__button">Prev</button>
+  <button class="pagination__button">Next</button>
+</section>
+`;
