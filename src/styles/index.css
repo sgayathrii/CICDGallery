@@ -20,10 +20,8 @@ body {
   padding: 20px;
   position: sticky;
 }
-.navigation__item {
-}
 
-.search {
+.search-container__input {
   height: 35px;
   padding-left: 10px;
   margin-top: 100px;
@@ -40,8 +38,6 @@ body {
 
 .image-container__item {
   border: 1px solid red;
-  width: 50px;
-  height: 50px;
 }
 
 .pagination {

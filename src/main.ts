@@ -1,3 +1,4 @@
+import { eventListeners } from './api';
 import './styles/index.css';
 
 const rootElement = document.querySelector('#app') as HTMLElement;
@@ -11,7 +12,10 @@ rootElement.innerHTML = `
         target="_blank" href="https://www.github.com/abdejohan">GitHub</a>
     </nav>
 </header>
-<input class="search" type="search"  placeholder="Search.."/>
+<form class="search-container">
+  <input class="search-container__input" type="search"  placeholder="Search.."/>
+  <input type="submit"></input>
+</form>
 <section class="image-container">
    
 </section>
@@ -20,3 +24,5 @@ rootElement.innerHTML = `
   <button class="pagination__button">Next</button>
 </section>
 `;
+
+eventListeners();
