@@ -93,10 +93,20 @@ const appendToView = (images: Image[]) => {
   ) as HTMLElement;
   imageContainer.innerHTML = '';
   images.forEach((image: Image) => {
+    const flipOuter = document.createElement('div')
+    const flipInner = document.createElement('div')
+    const flipBack = document.createElement('div')
+    flipOuter.classList.add('flip-outer')
+    flipInner.classList.add('flip-inner')
+    flipBack.classList.add('flip-back')
+
     const img = document.createElement('img');
     img.classList.add('image-container__item');
     img.setAttribute('src', image.urls.thumb);
-    imageContainer.appendChild(img);
+    flipInner.appendChild(img)
+    flipInner.appendChild(flipBack)
+    flipOuter.appendChild(flipInner)
+    imageContainer.appendChild(flipOuter);
     img.addEventListener('click', flipImage);
   });
 };
