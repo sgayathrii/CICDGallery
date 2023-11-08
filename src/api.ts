@@ -34,8 +34,11 @@ export const getPhotos = async () => {
 
   const response = await data.json();
   if (response) {
-    window.history.pushState({ ...state, mode: 'random' , images: response}, '');
-    window.dispatchEvent(new Event('statechange'))
+    window.history.pushState(
+      { ...state, mode: 'random', images: response },
+      ''
+    );
+    window.dispatchEvent(new Event('statechange'));
   }
 };
 
@@ -76,8 +79,11 @@ export const searchPhotos = async (searchTerm: string) => {
     } else {
       window.localStorage.setItem('suggestions', JSON.stringify([searchTerm]));
     }
-    window.history.pushState({ ...state, mode: 'search' , images: response.results}, '');
-    window.dispatchEvent(new Event('statechange'))
+    window.history.pushState(
+      { ...state, mode: 'search', images: response.results },
+      ''
+    );
+    window.dispatchEvent(new Event('statechange'));
   }
 };
 
@@ -91,6 +97,7 @@ const appendToView = (images: Image[]) => {
     img.classList.add('image-container__item');
     img.setAttribute('src', image.urls.thumb);
     imageContainer.appendChild(img);
+    img.addEventListener('click', flipImage);
   });
 };
 
@@ -119,8 +126,8 @@ export const eventListeners = () => {
   inputElement?.addEventListener('blur', clearSuggestions);
 
   window.addEventListener('statechange', () => {
-    return appendToView(window.history.state.images)
-  })
+    return appendToView(window.history.state.images);
+  });
 };
 
 const clearSuggestions = () => {
@@ -146,3 +153,5 @@ const displaySuggestions = () => {
     ulElement.style.display = 'block';
   }
 };
+
+const flipImage = () => console.log('flipped');
