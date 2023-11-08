@@ -24,6 +24,7 @@ body {
 
 .search-container__suggestions {
   border: 1px solid red;
+  height: 200px;
 }
 
 .search-container__input {

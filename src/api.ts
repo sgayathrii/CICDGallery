@@ -62,6 +62,12 @@ export const searchPhotos = async (searchTerm: string) => {
 
   const response = await data.json();
   if (response) {
+    const suggestions = window.localStorage.getItem('suggestions')
+    if(suggestions) {
+      const suggestionsJson = JSON.parse(suggestions);
+      console.log(suggestionsJson)
+      window.localStorage.setItem('suggestions', js)
+    }
     window.history.pushState({ ...state, mode: 'search' }, '');
     appendToView(response.results);
   }
@@ -102,4 +108,9 @@ export const eventListeners = () => {
   inputElement?.addEventListener('focus', displaySuggestions);
 };
 
-const displaySuggestions = () => {};
+const displaySuggestions = () => {
+  const liElement = document.createElement('li');
+  liElement.textContent = "hello"
+  const ulElement = document.querySelector('.search-container__suggestions');
+  ulElement?.appendChild(liElement)
+};
