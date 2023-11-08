@@ -154,4 +154,7 @@ const displaySuggestions = () => {
   }
 };
 
-const flipImage = () => console.log('flipped');
+const flipImage = (e) => {
+  e.target.classList.toggle("image-container__item--flipped")
+
+};
