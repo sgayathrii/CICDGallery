@@ -62,14 +62,17 @@ export const searchPhotos = async (searchTerm: string) => {
 
   const response = await data.json();
   if (response) {
-    const suggestions = window.localStorage.getItem('suggestions')
-    if(suggestions) {
+    const suggestions = window.localStorage.getItem('suggestions');
+    if (suggestions) {
       const suggestionsJson = JSON.parse(suggestions);
-      console.log(suggestionsJson)
-      suggestionsJson.push(searchTerm)
-      window.localStorage.setItem('suggestions', JSON.stringify(suggestionsJson))
+      console.log(suggestionsJson);
+      suggestionsJson.push(searchTerm);
+      window.localStorage.setItem(
+        'suggestions',
+        JSON.stringify(suggestionsJson)
+      );
     } else {
-      window.localStorage.setItem('suggestions', JSON.stringify([searchTerm]))
+      window.localStorage.setItem('suggestions', JSON.stringify([searchTerm]));
     }
     window.history.pushState({ ...state, mode: 'search' }, '');
     appendToView(response.results);
@@ -94,6 +97,7 @@ export const eventListeners = () => {
   const searchContainer = document.querySelector('.search-container');
   searchContainer?.addEventListener('submit', (e) => {
     e.preventDefault();
+    clearSuggestions();
     const form = e.target as HTMLFormElement;
     // @ts-expect-error expect error
     const userInputField = form.elements['searchInput'];
@@ -109,17 +113,29 @@ export const eventListeners = () => {
 
   const inputElement = document.querySelector('.search-container__input');
   inputElement?.addEventListener('focus', displaySuggestions);
+  inputElement?.addEventListener('blur', clearSuggestions);
+};
+
+const clearSuggestions = () => {
+  const ulElement = document.querySelector(
+    '.search-container__suggestions'
+  ) as HTMLElement;
+  ulElement.innerHTML = '';
+  ulElement.style.display = 'none';
 };
 
 const displaySuggestions = () => {
-  const suggestions = window.localStorage.getItem('suggestions')
-  if(suggestions){
-    const suggestionsArr = JSON.parse(suggestions)
-    suggestionsArr.forEach((suggestion:string) => {
+  const ulElement = document.querySelector(
+    '.search-container__suggestions'
+  ) as HTMLElement;
+  const suggestions = window.localStorage.getItem('suggestions');
+  if (suggestions) {
+    const suggestionsArr = JSON.parse(suggestions);
+    suggestionsArr.forEach((suggestion: string) => {
       const liElement = document.createElement('li');
-      liElement.textContent = suggestion
-      const ulElement = document.querySelector('.search-container__suggestions');
-      ulElement?.appendChild(liElement)
-    })
+      liElement.textContent = suggestion;
+      ulElement?.appendChild(liElement);
+    });
+    ulElement.style.display = 'block';
   }
 };
