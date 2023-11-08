@@ -66,7 +66,10 @@ export const searchPhotos = async (searchTerm: string) => {
     if(suggestions) {
       const suggestionsJson = JSON.parse(suggestions);
       console.log(suggestionsJson)
-      window.localStorage.setItem('suggestions', js)
+      suggestionsJson.push(searchTerm)
+      window.localStorage.setItem('suggestions', JSON.stringify(suggestionsJson))
+    } else {
+      window.localStorage.setItem('suggestions', JSON.stringify([searchTerm]))
     }
     window.history.pushState({ ...state, mode: 'search' }, '');
     appendToView(response.results);
@@ -109,8 +112,14 @@ export const eventListeners = () => {
 };
 
 const displaySuggestions = () => {
-  const liElement = document.createElement('li');
-  liElement.textContent = "hello"
-  const ulElement = document.querySelector('.search-container__suggestions');
-  ulElement?.appendChild(liElement)
+  const suggestions = window.localStorage.getItem('suggestions')
+  if(suggestions){
+    const suggestionsArr = JSON.parse(suggestions)
+    suggestionsArr.forEach((suggestion:string) => {
+      const liElement = document.createElement('li');
+      liElement.textContent = suggestion
+      const ulElement = document.querySelector('.search-container__suggestions');
+      ulElement?.appendChild(liElement)
+    })
+  }
 };
