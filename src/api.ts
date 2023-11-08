@@ -4,6 +4,9 @@ type Image = {
   urls: {
     thumb: string;
   };
+  description: string;
+  alt_description: string;
+  likes: number;
 };
 
 type State = {
@@ -101,6 +104,11 @@ const appendToView = (images: Image[]) => {
     flipInner.classList.add('flip-inner');
     flipBack.classList.add('flip-back');
     flipFront.classList.add('flip-front');
+
+    flipBack.innerHTML = `
+    <p>${image.description ?? image.alt_description}</p>
+    <p>Likes: ${image.likes}</p>
+    `
 
     const img = document.createElement('img');
     img.classList.add('image-container__item');
