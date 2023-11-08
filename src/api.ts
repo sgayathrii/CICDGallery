@@ -110,7 +110,6 @@ const appendToView = (images: Image[]) => {
     flipInner.appendChild(flipFront);
     flipOuter.appendChild(flipInner);
     imageContainer.appendChild(flipOuter);
-    img.addEventListener('click', flipImage);
   });
 };
 
@@ -167,6 +166,4 @@ const displaySuggestions = () => {
   }
 };
 
-const flipImage = (e) => {
-  e.target.classList.toggle('image-container__item--flipped');
-};
+
