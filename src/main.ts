@@ -14,6 +14,7 @@ rootElement.innerHTML = `
 </header>
 <form class="search-container">
   <input class="search-container__input" type="search" name="searchInput" placeholder="Search.."/>
+  <div class="search-container__suggestions"></div>
   <input type="submit"></input>
 </form>
 
