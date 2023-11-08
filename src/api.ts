@@ -23,7 +23,7 @@ const state: State = {
   mode: 'random',
   images: [],
 };
-
+const nonused = 0;
 export const getPhotos = async () => {
   const data = await fetch(
     `${apiUrl}/photos?page=${window.history.state.pageNumber}&per_page=9`,
@@ -108,7 +108,7 @@ const appendToView = (images: Image[]) => {
     flipBack.innerHTML = `
     <p>${image.description ?? image.alt_description}</p>
     <p>Likes: ${image.likes}</p>
-    `
+    `;
 
     const img = document.createElement('img');
     img.classList.add('image-container__item');
@@ -173,5 +173,3 @@ const displaySuggestions = () => {
     ulElement.style.display = 'block';
   }
 };
-
-
