@@ -13,7 +13,7 @@ rootElement.innerHTML = `
     </nav>
 </header>
 <form class="search-container">
-  <input class="search-container__input" type="search"  placeholder="Search.."/>
+  <input class="search-container__input" type="search" name="searchInput" placeholder="Search.."/>
   <input type="submit"></input>
 </form>
 

@@ -39,6 +39,21 @@ export const eventListeners = () => {
 
   element?.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('hello');
+    const form = e.target as HTMLFormElement;
+       // get the field t hat you want
+       const userInputField = form.elements['searchInput'] as HTMLInputElement;
+    searchPhotos(e.target)
   });
 };
+
+export const searchPhotos = async (searchTerm: string) => {
+  const data = await fetch(`${apiUrl}/photos?page=1&per_page=9&query=${searchTerm}`, {
+    headers: {
+      Authorization: 'Client-ID ' + apiKey,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const response = await data.json();
+  console.log(response);
+}
