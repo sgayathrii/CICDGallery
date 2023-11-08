@@ -1,24 +1,34 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { eventListeners, getPhotos } from './api';
+import './styles/index.css';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const rootElement = document.querySelector('#app') as HTMLElement;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+rootElement.innerHTML = `
+<header>
+    <nav class="navigation">
+        <span class="navigation__item">Logo</span>
+        <a 
+        class="navigation__item"
+        target="_blank" href="https://www.github.com/abdejohan">GitHub</a>
+    </nav>
+</header>
+<form class="search-container">
+  <input class="search-container__input" autocomplete="off" type="search" name="searchInput" placeholder="Search.."/>
+  <ul class="search-container__suggestions"></ul>
+  <input type="submit"></input>
+</form>
+
+
+<section class="image-container">
+   
+</section>
+
+
+<section class="pagination">
+  <button id="prev" class="pagination__button">Prev</button>
+  <button id="next" class="pagination__button">Next</button>
+</section>
+`;
+
+getPhotos();
+eventListeners();
