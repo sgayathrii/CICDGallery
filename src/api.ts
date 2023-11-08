@@ -106,6 +106,7 @@ export const eventListeners = () => {
       ''
     );
     searchPhotos(userInputField.value);
+    userInputField.blur();
   });
   // Button event
   const buttonNext = document.querySelector('#next');
