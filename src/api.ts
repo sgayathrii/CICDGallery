@@ -39,10 +39,9 @@ export const eventListeners = () => {
 
   element?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-       // get the field t hat you want
-       const userInputField = form.elements['searchInput'] as HTMLInputElement;
-    searchPhotos(e.target)
+    const form = e.target;
+       const userInputField = form.elements['searchInput'];
+       searchPhotos(userInputField.value)
   });
 };
 
