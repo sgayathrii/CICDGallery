@@ -9,6 +9,7 @@ type Image = {
 type State = {
   pageNumber: number;
   mode: string;
+  images: Image[];
 };
 /** HEADER:
  * Accept-Version: v1
@@ -17,6 +18,7 @@ type State = {
 const state: State = {
   pageNumber: 1,
   mode: 'random',
+  images: [],
 };
 
 export const getPhotos = async () => {
@@ -32,7 +34,7 @@ export const getPhotos = async () => {
 
   const response = await data.json();
   if (response) {
-    window.history.pushState({ ...state, mode: 'random' }, '');
+    window.history.pushState({ ...state, mode: 'random' , images: response}, '');
     appendToView(response);
   }
 };
@@ -115,6 +117,11 @@ export const eventListeners = () => {
   const inputElement = document.querySelector('.search-container__input');
   inputElement?.addEventListener('focus', displaySuggestions);
   inputElement?.addEventListener('blur', clearSuggestions);
+
+  window.addEventListener('statechange', () => {
+    const imageContainer = document.querySelector('.image-container') as HTMLElement;
+    
+  })
 };
 
 const clearSuggestions = () => {
