@@ -23,7 +23,7 @@ const state: State = {
   mode: 'random',
   images: [],
 };
-const nonused = 0;
+
 export const getPhotos = async () => {
   const data = await fetch(
     `${apiUrl}/photos?page=${window.history.state.pageNumber}&per_page=9`,
