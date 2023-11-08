@@ -1,4 +1,4 @@
-import { eventListeners } from './api';
+import { eventListeners, getPhotos } from './api';
 import './styles/index.css';
 
 const rootElement = document.querySelector('#app') as HTMLElement;
@@ -16,13 +16,18 @@ rootElement.innerHTML = `
   <input class="search-container__input" type="search"  placeholder="Search.."/>
   <input type="submit"></input>
 </form>
+
+
 <section class="image-container">
    
 </section>
+
+
 <section class="pagination">
   <button class="pagination__button">Prev</button>
   <button class="pagination__button">Next</button>
 </section>
 `;
 
+getPhotos();
 eventListeners();

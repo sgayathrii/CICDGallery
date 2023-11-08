@@ -5,8 +5,7 @@ const apiUrl = import.meta.env.VITE_UNSPLASH_API_URL;
  * Accept-Version: v1
  */
 
-export const getPhotos = async (e) => {
-  e.preventDefault();
+export const getPhotos = async () => {
   const data = await fetch(`${apiUrl}/photos?page=1&per_page=9`, {
     headers: {
       Authorization: 'Client-ID ' + apiKey,
