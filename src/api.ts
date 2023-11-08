@@ -35,7 +35,7 @@ export const getPhotos = async () => {
   const response = await data.json();
   if (response) {
     window.history.pushState({ ...state, mode: 'random' , images: response}, '');
-    appendToView(response);
+    window.dispatchEvent(new Event('statechange'))
   }
 };
 
@@ -76,8 +76,8 @@ export const searchPhotos = async (searchTerm: string) => {
     } else {
       window.localStorage.setItem('suggestions', JSON.stringify([searchTerm]));
     }
-    window.history.pushState({ ...state, mode: 'search' }, '');
-    appendToView(response.results);
+    window.history.pushState({ ...state, mode: 'search' , images: response.results}, '');
+    window.dispatchEvent(new Event('statechange'))
   }
 };
 
@@ -119,8 +119,7 @@ export const eventListeners = () => {
   inputElement?.addEventListener('blur', clearSuggestions);
 
   window.addEventListener('statechange', () => {
-    const imageContainer = document.querySelector('.image-container') as HTMLElement;
-    
+    return appendToView(window.history.state.images)
   })
 };
 
