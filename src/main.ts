@@ -24,8 +24,8 @@ rootElement.innerHTML = `
 
 
 <section class="pagination">
-  <button class="pagination__button">Prev</button>
-  <button class="pagination__button">Next</button>
+  <button id="prev" class="pagination__button">Prev</button>
+  <button id="next" class="pagination__button">Next</button>
 </section>
 `;
 

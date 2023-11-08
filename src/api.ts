@@ -5,12 +5,22 @@ type Image = {
     thumb: string;
   };
 };
+
+type State = {
+  pageNumber: number;
+}
 /** HEADER:
  * Accept-Version: v1
  */
 
+const state = {
+  pageNumber: 1
+}
+
+state.pageNumber = window.history.state?.pageNumber || state.pageNumber
+
 export const getPhotos = async () => {
-  const data = await fetch(`${apiUrl}/photos?page=1&per_page=9`, {
+  const data = await fetch(`${apiUrl}/photos?page=${state.pageNumber}&per_page=9`, {
     headers: {
       Authorization: 'Client-ID ' + apiKey,
       'Content-Type': 'application/json',
@@ -23,6 +33,10 @@ export const getPhotos = async () => {
   }
 };
 
+const nextPage = () => {
+  window.history.pushState({pageNumber:state.pageNumber + 1}, '')
+}
+
 export const eventListeners = () => {
   const element = document.querySelector('.search-container');
   element?.addEventListener('submit', (e) => {
@@ -32,11 +46,14 @@ export const eventListeners = () => {
     const userInputField = form.elements['searchInput'];
     searchPhotos(userInputField.value);
   });
+  const buttonNext = document.querySelector("#next");
+  buttonNext?.addEventListener('click', nextPage)
 };
 
 export const searchPhotos = async (searchTerm: string) => {
+
   const data = await fetch(
-    `${apiUrl}/search/photos?page=1&per_page=9&query=${searchTerm}`,
+    `${apiUrl}/search/photos?page=${state.pageNumber}&per_page=9&query=${searchTerm}`,
     {
       headers: {
         Authorization: 'Client-ID ' + apiKey,
