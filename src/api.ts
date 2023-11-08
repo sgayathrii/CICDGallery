@@ -93,19 +93,22 @@ const appendToView = (images: Image[]) => {
   ) as HTMLElement;
   imageContainer.innerHTML = '';
   images.forEach((image: Image) => {
-    const flipOuter = document.createElement('div')
-    const flipInner = document.createElement('div')
-    const flipBack = document.createElement('div')
-    flipOuter.classList.add('flip-outer')
-    flipInner.classList.add('flip-inner')
-    flipBack.classList.add('flip-back')
+    const flipOuter = document.createElement('div');
+    const flipInner = document.createElement('div');
+    const flipBack = document.createElement('div');
+    const flipFront = document.createElement('div');
+    flipOuter.classList.add('flip-outer');
+    flipInner.classList.add('flip-inner');
+    flipBack.classList.add('flip-back');
+    flipFront.classList.add('flip-front');
 
     const img = document.createElement('img');
     img.classList.add('image-container__item');
     img.setAttribute('src', image.urls.thumb);
-    flipInner.appendChild(img)
-    flipInner.appendChild(flipBack)
-    flipOuter.appendChild(flipInner)
+    flipFront.appendChild(img);
+    flipInner.appendChild(flipBack);
+    flipInner.appendChild(flipFront);
+    flipOuter.appendChild(flipInner);
     imageContainer.appendChild(flipOuter);
     img.addEventListener('click', flipImage);
   });
@@ -165,6 +168,5 @@ const displaySuggestions = () => {
 };
 
 const flipImage = (e) => {
-  e.target.classList.toggle("image-container__item--flipped")
-
+  e.target.classList.toggle('image-container__item--flipped');
 };
